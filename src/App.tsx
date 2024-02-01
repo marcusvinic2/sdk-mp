@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useMercadoPago } from 'mercadopago-v2-react';
-import { useEffect, useState } from 'react';
+//import { useMercadoPago } from 'mercadopago-v2-react';
+import { useState } from 'react';
 import { initMercadoPago } from '@mercadopago/sdk-react';
 import { createCardToken } from '@mercadopago/sdk-react/coreMethods';
 
@@ -9,9 +9,9 @@ function App() {
 
   const [formData, setFormData] = useState<any>({});
 
-  const { cardFlag, checkCardDigits, createToken, identificationTypeOptions, installmentOptions, issuer, setAmountValue, months, years } = useMercadoPago({
-    publicKey: 'APP_USR-c6d00888-c9f3-4e34-b958-ac3107dd7544'
-  });
+  // const { cardFlag, checkCardDigits, createToken, identificationTypeOptions, installmentOptions, issuer, setAmountValue, months, years } = useMercadoPago({
+  //   publicKey: 'APP_USR-c6d00888-c9f3-4e34-b958-ac3107dd7544'
+  // });
 
   function handleChangeValueInput(event: any) {
     setFormData((state: any) => ({
@@ -29,9 +29,9 @@ function App() {
     console.log({ formData });
   }
 
-  useEffect(() => {
-    setAmountValue('150');
-  }, [setAmountValue]);
+  // useEffect(() => {
+  //   setAmountValue('150');
+  // }, [setAmountValue]);
 
   const generateToken = async () => {
     const cardToken = await createCardToken({
@@ -49,8 +49,8 @@ function App() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <pre>issuer: {JSON.stringify(issuer, null, 2)}</pre>
-      <pre>cardFlag: {JSON.stringify(cardFlag, null, 2)}</pre>
+      {/* <pre>issuer: {JSON.stringify(issuer, null, 2)}</pre>
+      <pre>cardFlag: {JSON.stringify(cardFlag, null, 2)}</pre> */}
       <button onClick={() => generateToken()}>gerar token</button>
       <div>
         <label>Portador: </label>
@@ -64,7 +64,7 @@ function App() {
 
       <div>
         <label>Tipo de Documento: </label>
-        <select name="identificationType" value={formData.identificationType} onChange={handleChangeValueInput}>
+        {/* <select name="identificationType" value={formData.identificationType} onChange={handleChangeValueInput}>
           <option disabled value="">
             Tipo de documento
           </option>
@@ -73,7 +73,7 @@ function App() {
               {document.label}
             </option>
           ))}
-        </select>
+        </select> */}
       </div>
 
       <div>
@@ -83,7 +83,7 @@ function App() {
 
       <div>
         <label>Número do Cartão: </label>
-        <input
+        {/* <input
           type="text"
           name="cardNumber"
           placeholder="0000 0000 0000 0000"
@@ -92,7 +92,7 @@ function App() {
             checkCardDigits(event.target.value);
             handleChangeValueInput(event);
           }}
-        />
+        /> */}
       </div>
 
       <div>
@@ -100,7 +100,7 @@ function App() {
         <input type="text" name="securityCode" placeholder="000" value={formData.securityCode} onChange={handleChangeValueInput} />
       </div>
 
-      <div>
+      {/* <div>
         <label>Mês: </label>
         <select name="cardExpirationMonth" value={formData.cardExpirationMonth} onChange={handleChangeValueInput}>
           <option disabled value="">
@@ -140,7 +140,7 @@ function App() {
             </option>
           ))}
         </select>
-      </div>
+      </div> */}
 
       <button type="submit">Efetuar pagamento</button>
     </form>
